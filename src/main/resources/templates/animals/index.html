@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Animales</title>
+</head>
+
+<style>
+
+    body {
+        margin-left: 100px;
+    }
+
+    :root{
+     font-family: Arial;
+    }
+
+    td {
+        border-top: 1px solid;
+        border-bottom: 1px solid;
+    }
+
+    a {
+        color: dodgerblue;
+    }
+
+    Acciones {
+        position: absolute;
+    }
+
+    .Detalles {
+        transition: 0.3s;
+        margin: 15px;
+        padding: 13px;
+        border:solid green 1px;
+        border-radius: 4px;
+        color: green;
+        text-decoration: none;
+    }
+
+    .Detalles:hover {
+        transform: scale(10, 10);
+        background-color: green;
+        color:white;
+    }
+
+    .Editar {
+        transition: 0.3s;
+        margin: 15px;
+        padding: 13px;
+        border:solid #ffdd00 1px;
+        border-radius: 4px;
+        color: #ffdd00;
+        text-decoration: none;
+    }
+
+    .Editar:hover {
+        background-color: #ffdd00;
+        color:white;
+    }
+
+    .Borrar {
+        transition: 0.3s;
+        background-color: white;
+        margin: 15px;
+        padding: 15px;
+        border:solid red 1px;
+        border-radius: 4px;
+        color: red;
+        text-decoration: none;
+    }
+
+    .Borrar:hover {
+        background-color: red;
+        color:white;
+    }
+
+
+</style>
+
+<body>
+<div style="background-color: #007bff; color: white; padding: 5px; font-size: 20px; font-weight: bold; ">Animalia</div>
+
+<h1>Listado de Animales</h1>
+<a th:href="@{/animals/new}">Crear Nuevo Animal</a>
+<br><br>
+<table cellpadding="8">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Edad Media</th>
+        <th>Extinto</th>
+        <th class = "Acciones" >Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="animal : ${animals}">
+        <td th:text="${animal.id}"></td>
+        <td th:text="${animal.nombre}"></td>
+        <td th:text="${animal.vidaMedia}"></td>
+        <td th:text="${animal.extinto ? 'Sí' : 'No'}"></td>
+        <td class="botones">
+            <a class ="Detalles" th:href="@{/animals/{id}(id=${animal.id})}">Detalles</a>
+            <a class = "Editar" th:href="@{/animals/{id}/edit(id=${animal.id})}">Editar</a>
+            <form th:action="@{/animals/{id}/delete(id=${animal.id})}" method="post" style="display:inline;">
+                <button class = "Borrar" type="submit">Borrar</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

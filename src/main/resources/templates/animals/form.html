@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Animal</title>
+</head>
+
+<style>
+
+    :root {
+        font-family: Arial;
+    }
+
+    body {
+        padding-left: 40px;
+    }
+
+    .nombre, .vida {
+        padding: 5px;
+    }
+
+    .guardar {
+        background-color: dodgerblue;
+        padding: 13px;
+        border:solid dodgerblue 1px;
+        border-radius: 4px;
+        color: white;
+        text-decoration: none;
+    }
+
+    .guardar:hover {
+
+        transform: scale(1);
+    }
+
+    a {
+        color: dodgerblue;
+    }
+
+</style>
+
+<body>
+<div style="background-color: #007bff; color: white; padding: 15px; font-size: 20px; font-weight: bold;">Animalia</div>
+
+<h1 th:text="${animal.id == null} ? 'Crear Nuevo Animal' : 'Editar Animal'">Formulario</h1>
+
+<form th:action="@{/animals}" th:object="${animal}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <label>Nombre</label><br>
+    <input class = "nombre" type="text" th:field="*{nombre}" /><br>
+    <p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" style="color:red;"></p>
+    <br>
+
+    <label>Vida Media</label><br>
+    <input class = "vida" type="number" th:field="*{vidaMedia}" /><br>
+    <p th:if="${#fields.hasErrors('vidaMedia')}" th:errors="*{vidaMedia}" style="color:red;"></p>
+    <br>
+
+    <label>
+        <input type="checkbox" th:field="*{extinto}" /> Marcar si está extinto
+    </label>
+    <br><br>
+
+    <button class = "guardar" type="submit" th:text="${animal.id == null} ? 'Crear' : 'Guardar'">Guardar</button>
+</form>
+
+<br>
+<a th:href="@{/animals}">Volver al listado</a>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalles</title>
+</head>
+
+<style>
+
+  :root {
+    font-family: "Arial";
+  }
+
+  body {
+    padding-left: 20px ;
+  }
+
+  a {
+    color: dodgerblue;
+  }
+
+
+
+</style>
+
+<body>
+<div style="background-color: #007bff; color: white; padding: 15px; font-size: 20px; font-weight: bold;">Animalia</div>
+
+<h1>Detalles</h1>
+<ul>
+  <li>Id: <span th:text="${animal.id}"></span></li>
+  <li>Nombre: <span th:text="${animal.nombre}"></span></li>
+  <li>Vida Media: <span th:text="${animal.vidaMedia}"></span></li>
+  <li>Extinto: <span th:text="${animal.extinto ? 'Sí' : 'No'}"></span></li>
+</ul>
+
+<a th:href="@{/animals}">Volver al listado</a>
+</body>
+</html>
